@@ -99,6 +99,8 @@
     _positionType = styles[@"position"] ? [WXConvert WXPositionType:styles[@"position"]] : WXPositionTypeRelative;
     _transform = styles[@"transform"] ? [WXConvert NSString:styles[@"transform"]] : nil;
     _transformOrigin = styles[@"transformOrigin"] ? [WXConvert NSString:styles[@"transformOrigin"]] : nil;
+    _underlayColor = styles[@"underlayColor"] ? [WXConvert UIColor:styles[@"underlayColor"]] : nil;
+    _activeOpacity = styles[@"activeOpacity"] ? [WXConvert CGFloat:styles[@"activeOpacity"]] : CGFLOAT_MAX;
 }
 
 - (void)_updateViewStyles:(NSDictionary *)styles
@@ -161,6 +163,49 @@
             [_layer setNeedsDisplay];
         }
     }
+    
+    if (styles[@"underlayColor"]) {
+        _underlayColor = [WXConvert UIColor:styles[@"underlayColor"]];
+    }
+    
+    if (styles[@"activeOpacity"]) {
+        _activeOpacity = [WXConvert CGFloat:styles[@"activeOpacity"]];
+    }
+}
+
+-(BOOL)isShouldHighLight
+{
+    if(_underlayColor || _activeOpacity != CGFLOAT_MAX)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)highLight
+{
+    if(_underlayColor)
+    {
+        _layer.backgroundColor = _underlayColor.CGColor;
+        [self setNeedsDisplay];
+    }
+    if(_activeOpacity != CGFLOAT_MAX)
+    {
+        _layer.opacity = _activeOpacity;
+    }
+}
+
+
+-(void)hideHighLight
+{
+    if (!CGColorEqualToColor(_layer.backgroundColor,_backgroundColor.CGColor))
+        _layer.backgroundColor = _backgroundColor.CGColor;
+        [self setNeedsDisplay];
+    if(_activeOpacity != CGFLOAT_MAX)
+    {
+        _layer.opacity = _opacity;
+    }
+
 }
 
 - (void)_unloadViewWithReusing:(BOOL)isReusing

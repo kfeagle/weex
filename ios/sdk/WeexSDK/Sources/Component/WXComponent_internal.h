@@ -39,6 +39,8 @@
     UIView *_view;
     CGFloat _opacity;
     WXVisibility  _visibility;
+    UIColor *_underlayColor;
+    CGFloat _activeOpacity;
     
     /**
      *  Events
