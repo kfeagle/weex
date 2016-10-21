@@ -199,8 +199,10 @@
 -(void)hideHighLight
 {
     if (!CGColorEqualToColor(_layer.backgroundColor,_backgroundColor.CGColor))
+    {
         _layer.backgroundColor = _backgroundColor.CGColor;
         [self setNeedsDisplay];
+    }
     if(_activeOpacity != CGFLOAT_MAX)
     {
         _layer.opacity = _opacity;
