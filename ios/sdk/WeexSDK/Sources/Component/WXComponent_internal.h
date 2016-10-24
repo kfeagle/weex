@@ -155,6 +155,10 @@
 
 - (void)_updateViewStyles:(NSDictionary *)styles;
 
+- (void)_initViewPropertyWithAttributes:(NSDictionary *)attributes;
+
+- (void)_updateViewAttributes:(NSDictionary *)attributes;
+
 - (void)_initEvents:(NSArray *)events;
 
 - (void)_removeAllEvents;

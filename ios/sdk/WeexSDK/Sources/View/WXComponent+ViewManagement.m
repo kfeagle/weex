@@ -99,8 +99,6 @@
     _positionType = styles[@"position"] ? [WXConvert WXPositionType:styles[@"position"]] : WXPositionTypeRelative;
     _transform = styles[@"transform"] ? [WXConvert NSString:styles[@"transform"]] : nil;
     _transformOrigin = styles[@"transformOrigin"] ? [WXConvert NSString:styles[@"transformOrigin"]] : nil;
-    _underlayColor = styles[@"underlayColor"] ? [WXConvert UIColor:styles[@"underlayColor"]] : nil;
-    _activeOpacity = styles[@"activeOpacity"] ? [WXConvert CGFloat:styles[@"activeOpacity"]] : CGFLOAT_MAX;
 }
 
 - (void)_updateViewStyles:(NSDictionary *)styles
@@ -163,13 +161,23 @@
             [_layer setNeedsDisplay];
         }
     }
-    
-    if (styles[@"underlayColor"]) {
-        _underlayColor = [WXConvert UIColor:styles[@"underlayColor"]];
+}
+
+
+- (void)_initViewPropertyWithAttributes:(NSDictionary *)attributes
+{
+    _underlayColor = attributes[@"underlaycolor"] ? [WXConvert UIColor:attributes[@"underlaycolor"]] : nil;
+    _activeOpacity = attributes[@"activeopacity"] ? [WXConvert CGFloat:attributes[@"activeopacity"]] : CGFLOAT_MAX;
+}
+
+- (void)_updateViewAttributes:(NSDictionary *)attributes
+{
+    if (attributes[@"underlaycolor"]) {
+        _underlayColor = [WXConvert UIColor:attributes[@"underlaycolor"]];
     }
     
-    if (styles[@"activeOpacity"]) {
-        _activeOpacity = [WXConvert CGFloat:styles[@"activeOpacity"]];
+    if (attributes[@"activeopacity"]) {
+        _activeOpacity = [WXConvert CGFloat:attributes[@"activeopacity"]];
     }
 }
 
