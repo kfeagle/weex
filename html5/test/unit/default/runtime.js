@@ -17,8 +17,6 @@ runtime.setNativeConsole()
 import Vm from '../../../frameworks/legacy/vm'
 import { clearModules, getModule } from '../../../frameworks/legacy/app/register'
 
-const framework = init(config)
-
 function clearRefs (json) {
   delete json.ref
   if (json.children) {
@@ -31,9 +29,11 @@ describe('framework entry', () => {
   const oriCallAddElement = global.callAddElement
   const callNativeSpy = sinon.spy()
   const callAddElementSpy = sinon.spy()
-  const instanceId = Date.now() + ''
+  const instanceId = Date.now() + '1'
+  let framework
 
   before(() => {
+    framework = init(config)
     global.callNative = (id, tasks, callbackId) => {
       callNativeSpy(id, tasks, callbackId)
       /* istanbul ignore if */
@@ -63,6 +63,8 @@ describe('framework entry', () => {
   })
 
   after(() => {
+    framework.destroyInstance(instanceId)
+    framework = null
     config.Document.handler = function () {}
     global.callNative = oriCallNative
     global.callAddElement = oriCallAddElement
@@ -418,5 +420,118 @@ describe('framework entry', () => {
 describe('config', () => {
   it('config is an object', () => {
     init({})
+  })
+})
+
+describe('test define methods for registerComponents', () => {
+  const oriCallNative = global.callNative
+  const oriCallAddElement = global.callAddElement
+  const callNativeSpy = sinon.spy()
+  const callAddElementSpy = sinon.spy()
+  const instanceId = Date.now() + '2'
+  let framework
+
+  before(() => {
+    framework = init(config)
+    global.callNative = (id, tasks, callbackId) => {
+      callNativeSpy(id, tasks, callbackId)
+      /* istanbul ignore if */
+      if (callbackId !== '-1') {
+        framework.callJS(id, [{
+          method: 'callback',
+          args: [callbackId, null, true]
+        }])
+      }
+    }
+    config.Document.handler = global.callNative
+    global.callAddElement = (name, id, ref, json, index, callbackId) => {
+      callAddElementSpy(name, ref, json, index, callbackId)
+      /* istanbul ignore if */
+      if (callbackId !== '-1') {
+        framework.callJS(id, [{
+          method: 'callback',
+          args: [callbackId, null, true]
+        }])
+      }
+    }
+    framework.registerComponents([{
+      type: 'web',
+      methods: ['aaa', 'bbb', 'ccc']
+    }])
+  })
+
+  afterEach(() => {
+    callNativeSpy.reset()
+    callAddElementSpy.reset()
+  })
+
+  after(() => {
+    framework = null
+    config.Document.handler = function () {}
+    global.callNative = oriCallNative
+    global.callAddElement = oriCallAddElement
+  })
+
+  it('support define methods for kind of native components', () => {
+    const code = `
+      define('@weex-component/main',
+        function(require, exports, module) {
+          module.exports = {
+            ready: function() {
+              var webElement = this.$el('webview')
+	            webElement.aaa()
+              webElement.bbb()
+              webElement.ccc()
+            }
+          }
+
+          ;module.exports.style = {}
+
+          ;module.exports.template = {
+            'type': 'container',
+            'children': [{
+              'type': 'web',
+              'id': 'webview'
+            }]
+          }
+        }
+      )
+
+      bootstrap('@weex-component/main')
+    `
+    framework.createInstance(instanceId, code)
+
+    expect(callNativeSpy.callCount).to.be.equal(5)
+    expect(callAddElementSpy.callCount).to.be.equal(1)
+
+    expect(callNativeSpy.firstCall.args[0]).to.be.equal(instanceId)
+    expect(callNativeSpy.firstCall.args[1]).to.deep.equal([{
+      module: 'dom',
+      method: 'createBody',
+      args: [{
+        ref: '_root',
+        type: 'container',
+        attr: {},
+        style: {}
+      }]
+    }])
+
+    expect(callNativeSpy.secondCall.args[0]).to.be.equal(instanceId)
+    expect(callNativeSpy.secondCall.args[1][0].component).eql('web')
+    expect(callNativeSpy.secondCall.args[1][0].ref)
+    expect(callNativeSpy.secondCall.args[1][0].method).eql('aaa')
+    expect(callNativeSpy.secondCall.args[1][0].args).to.deep.equal([])
+
+    expect(callNativeSpy.thirdCall.args[0]).to.be.equal(instanceId)
+    expect(callNativeSpy.thirdCall.args[1][0].component).eql('web')
+    expect(callNativeSpy.thirdCall.args[1][0].ref)
+    expect(callNativeSpy.thirdCall.args[1][0].method).eql('bbb')
+    expect(callNativeSpy.thirdCall.args[1][0].args).to.deep.equal([])
+
+    expect(callNativeSpy.getCall(3).args[0]).to.be.equal(instanceId)
+    expect(callNativeSpy.getCall(3).args[1][0].component).eql('web')
+    expect(callNativeSpy.getCall(3).args[1][0].ref)
+    expect(callNativeSpy.getCall(3).args[1][0].method).eql('ccc')
+    expect(callNativeSpy.getCall(3).args[1][0].args).to.deep.equal([])
   })
 })
