@@ -378,8 +378,22 @@ function compileNativeComponent (vm, template, dest, type) {
     element.attr.append = template.append
   }
 
-  const treeMode = template.append === 'tree'
   const app = vm._app || {}
+
+  if (template.methods) {
+    template.methods.forEach((method) => {
+      element[method] = (...args) => {
+        app.callTasks({
+          component: template.type,
+          ref: element.ref,
+          method: method,
+          args: args
+        })
+      }
+    })
+  }
+
+  const treeMode = template.append === 'tree'
   if (app.lastSignal !== -1 && !treeMode) {
     console.debug('[JS Framework] compile to append single node for', element)
     app.lastSignal = attachTarget(vm, element, dest)
