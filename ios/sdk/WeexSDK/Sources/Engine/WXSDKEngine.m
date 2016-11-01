@@ -83,6 +83,11 @@
     [self registerComponent:@"textarea" withClass:NSClassFromString(@"WXTextAreaComponent")];
 	[self registerComponent:@"canvas" withClass:NSClassFromString(@"WXCanvasComponent")];
     [self registerComponent:@"slider-neighbor" withClass:NSClassFromString(@"WXSliderNeighborComponent")];
+    [self registerComponent:@"route" withClass:NSClassFromString(@"WXRouteComponent")];
+    [self registerComponent:@"linkTo" withClass:NSClassFromString(@"WXLinkToComponent")];
+    [self registerComponent:@"match" withClass:NSClassFromString(@"WXMatchComponent")];
+
+    
 }
 
 + (void)registerComponent:(NSString *)name withClass:(Class)clazz
