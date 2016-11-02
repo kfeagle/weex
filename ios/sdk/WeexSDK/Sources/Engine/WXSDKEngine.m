@@ -86,8 +86,6 @@
     [self registerComponent:@"route" withClass:NSClassFromString(@"WXRouteComponent")];
     [self registerComponent:@"link" withClass:NSClassFromString(@"WXLinkComponent")];
     [self registerComponent:@"match" withClass:NSClassFromString(@"WXMatchComponent")];
-
-    
 }
 
 + (void)registerComponent:(NSString *)name withClass:(Class)clazz
