@@ -11,6 +11,23 @@
 #import "WXHandlerFactory.h"
 #import "WXLog.h"
 #import "WXComponent+Events.h"
+#import "WXConvert.h"
+
+#define CURRENT_IP @"your computer device ip"
+
+#if TARGET_IPHONE_SIMULATOR
+#define DEMO_HOST @"127.0.0.1"
+#else
+#define DEMO_HOST CURRENT_IP
+#endif
+
+#define DEMO_URL(path) [NSString stringWithFormat:@"http://%@:12580/%s", DEMO_HOST, #path]
+
+#if DEBUG
+#define Link_URL [NSString stringWithFormat:@"http://%@:12580/examples/build/app", DEMO_HOST]
+#else
+#define Link_URL [NSString stringWithFormat:@"file://%@/bundlejs/app",[NSBundle mainBundle].bundlePath]  // 测试
+#endif
 
 @interface WXLinkComponent()
 
@@ -25,10 +42,12 @@
 {
     self = [super initWithRef:ref type:type styles:styles attributes:attributes events:events weexInstance:weexInstance];
     if (self) {
-        _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPattern)];
+        _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openTo)];
         _tap.delegate = self;
         if (attributes[@"to"]) {
-            _to = attributes[@"to"];
+            NSString *str = Link_URL;
+
+            _to = [NSString stringWithFormat:@"%@/%@",Link_URL,[WXConvert NSString:attributes[@"to"]]];
         }
     }
     return self;
@@ -48,7 +67,7 @@
 
 
 //重写render
-- (void)openPattern
+- (void)openTo
 {
     if (_to && [_to length] > 0) {
         id<WXNavigationProtocol> navigationHandler = [WXHandlerFactory handlerForProtocol:@protocol(WXNavigationProtocol)];
@@ -56,7 +75,7 @@
                                                             completion:
                                                             withContainer:)]) {
             __weak typeof(self) weexSelf = self;
-            [navigationHandler pushViewControllerWithParam:@{@"to":_to} completion:^(NSString *code, NSDictionary *responseData) {
+            [navigationHandler pushViewControllerWithParam:@{@"url":_to} completion:^(NSString *code, NSDictionary *responseData) {
                 WXLogDebug(@"Push success -> %@", weexSelf.to);
             } withContainer:self.weexInstance.viewController];
         } else {

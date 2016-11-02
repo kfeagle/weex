@@ -13,6 +13,7 @@
         // Support sub directory, e.g. 'new-fashion/index'
 
         // common
+        {name: 'route/app', title: 'route'},
         {name: 'hello', title: 'Hello World'},
         {name: 'syntax/index', title: 'More Syntax'},
         {name: 'style/index', title: 'Common Style'},

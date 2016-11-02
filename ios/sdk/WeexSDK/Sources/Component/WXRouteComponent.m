@@ -8,6 +8,7 @@
 
 #import "WXRouteComponent.h"
 
+// route 告知当前 需要渲染页面，通过它通知获取
 @implementation WXRouteComponent
 
 @end
