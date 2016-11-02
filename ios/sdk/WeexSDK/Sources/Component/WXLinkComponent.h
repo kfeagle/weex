@@ -8,6 +8,6 @@
 
 #import <WeexSDK/WeexSDK.h>
 
-@interface WXLinkToComponent : WXComponent
+@interface WXLinkComponent : WXComponent
 
 @end

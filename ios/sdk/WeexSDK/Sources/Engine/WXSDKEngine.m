@@ -84,7 +84,7 @@
 	[self registerComponent:@"canvas" withClass:NSClassFromString(@"WXCanvasComponent")];
     [self registerComponent:@"slider-neighbor" withClass:NSClassFromString(@"WXSliderNeighborComponent")];
     [self registerComponent:@"route" withClass:NSClassFromString(@"WXRouteComponent")];
-    [self registerComponent:@"linkTo" withClass:NSClassFromString(@"WXLinkToComponent")];
+    [self registerComponent:@"link" withClass:NSClassFromString(@"WXLinkComponent")];
     [self registerComponent:@"match" withClass:NSClassFromString(@"WXMatchComponent")];
 
     
