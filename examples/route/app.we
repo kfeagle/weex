@@ -5,17 +5,17 @@
 <!--</template>-->
 
 <template>
-    <Router>
+    <router>
         <div id="app">
-            <link to = "/home" style="width: 100px; height: 200px;background-color: red"><text>go home</text></Link>
-            <link to = "/about" style="width: 100px; height: 200px;background-color: green"><text>go about</text></Link>
-            <Match pattern = "/home">
+            <a to = "/home" style="width: 100px; height: 200px;background-color: red"><text>go home</text></a>
+            <a to = "/about" style="width: 100px; height: 200px;background-color: green"><text>go about</text></a>
+            <match pattern = "/home">
                 <!--<img id="img" src="./assets/logo.png"/>-->
                 <text style="font-size:100px;">home</text>
-            </Match>
-            <Match pattern = "/about">
+            </match>
+            <match pattern = "/about">
                 <text style="font-size:100px;">about</text>
-            </Match>
+            </match>
         </div>
-    </Router>
+    </router>
 </template>
