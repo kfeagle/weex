@@ -12,6 +12,7 @@
 #import "WXLog.h"
 #import "WXComponent+Events.h"
 #import "WXConvert.h"
+#import "WXRouteManager.h"
 
 #define CURRENT_IP @"your computer device ip"
 
@@ -24,7 +25,7 @@
 #define DEMO_URL(path) [NSString stringWithFormat:@"http://%@:12580/%s", DEMO_HOST, #path]
 
 #if DEBUG
-#define Link_URL [NSString stringWithFormat:@"http://%@:12580/examples/build/app", DEMO_HOST]
+#define Link_URL [NSString stringWithFormat:@"http://%@:12580/examples/build/route/app", DEMO_HOST]
 #else
 #define Link_URL [NSString stringWithFormat:@"file://%@/bundlejs/app",[NSBundle mainBundle].bundlePath]  // 测试
 #endif
@@ -45,9 +46,7 @@
         _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openTo)];
         _tap.delegate = self;
         if (attributes[@"to"]) {
-            NSString *str = Link_URL;
-
-            _to = [NSString stringWithFormat:@"%@/%@",Link_URL,[WXConvert NSString:attributes[@"to"]]];
+            _to = attributes[@"to"];
         }
     }
     return self;
@@ -69,14 +68,18 @@
 //重写render
 - (void)openTo
 {
-    if (_to && [_to length] > 0) {
+    WXRouteManager *routeManager = [WXRouteManager sharedInstance];
+    routeManager.to = _to;
+    NSString *str = Link_URL;
+    NSString *url = [NSString stringWithFormat:@"%@.js?route=%@",Link_URL,[WXConvert NSString:_to]];
+    if (url && [url length] > 0) {
         id<WXNavigationProtocol> navigationHandler = [WXHandlerFactory handlerForProtocol:@protocol(WXNavigationProtocol)];
         if ([navigationHandler respondsToSelector:@selector(pushViewControllerWithParam:
                                                             completion:
                                                             withContainer:)]) {
             __weak typeof(self) weexSelf = self;
-            [navigationHandler pushViewControllerWithParam:@{@"url":_to} completion:^(NSString *code, NSDictionary *responseData) {
-                WXLogDebug(@"Push success -> %@", weexSelf.to);
+            [navigationHandler pushViewControllerWithParam:@{@"url":url} completion:^(NSString *code, NSDictionary *responseData) {
+                WXLogDebug(@"Push success -> %@", url);
             } withContainer:self.weexInstance.viewController];
         } else {
             WXLogError(@"Event handler of class %@ does not respond to pushViewControllerWithParam", NSStringFromClass([navigationHandler class]));

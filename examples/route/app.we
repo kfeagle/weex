@@ -7,10 +7,9 @@
 <template>
     <router>
         <div id="app">
-            <a to = "/home" style="width: 100px; height: 200px;background-color: red"><text>go home</text></a>
-            <a to = "/about" style="width: 100px; height: 200px;background-color: green"><text>go about</text></a>
+            <link to = "/home" style="width: 100px; height: 200px;background-color: red"><text>go home</text></link>
+            <link to = "/about" style="width: 100px; height: 200px;background-color: green"><text>go about</text></link>
             <match pattern = "/home">
-                <!--<img id="img" src="./assets/logo.png"/>-->
                 <text style="font-size:100px;">home</text>
             </match>
             <match pattern = "/about">
