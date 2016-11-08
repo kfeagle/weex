@@ -7,6 +7,7 @@
  */
 
 #import "WXMatchComponent.h"
+#import "WXRouteManager.h"
 
 @interface WXMatchComponent()
 
@@ -18,9 +19,32 @@
 
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance
 {
+    
     if (self = [super initWithRef:ref type:type styles:styles attributes:attributes events:events weexInstance:weexInstance]) {
         self.pattern = attributes[@"pattern"];
     }
+    
+    NSString *pattern = @"";
+    if(attributes && [attributes objectForKey:@"pattern"])
+    {
+        pattern = [WXConvert NSString:[attributes objectForKey:@"pattern"]];
+    }
+    
+    WXRouteManager *routeManager = [WXRouteManager sharedInstance];
+    if([type isEqualToString:@"match"])
+    {
+        if(!routeManager.to )
+        {
+            self.shouldAway = YES;
+        }
+        
+        if( ![pattern isEqualToString:routeManager.to] )
+        {
+            self.shouldAway = YES;
+        }
+    }
+    
+    
     return self;
 }
 - (void)updateAttributes:(NSDictionary *)attributes

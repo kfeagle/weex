@@ -8,6 +8,6 @@
 
 #import <WeexSDK/WeexSDK.h>
 
-@interface WXLinkComponent : WXComponent<UIGestureRecognizerDelegate>
+@interface WXLinkToComponent : WXComponent<UIGestureRecognizerDelegate>
 
 @end

@@ -1,19 +1,13 @@
-<!--<template>-->
-    <!--<div>-->
-        <!--<text style="font-size:100px;">Hello World.</text>-->
-    <!--</div>-->
-<!--</template>-->
-
 <template>
     <router>
-        <div id="app">
-            <link to = "/home" style="width: 100px; height: 200px;background-color: red"><text>go home</text></link>
-            <link to = "/about" style="width: 100px; height: 200px;background-color: green"><text>go about</text></link>
+        <div ida="app">
+            <link-to to = "/home" style="width: 750px; height: 100px;background-color: red"><text>go home</text></link-to>
+            <link-to to = "/about" style="width: 750px; height: 100px;background-color: green"><text>go about</text></link-to>
             <match pattern = "/home">
-                <text style="font-size:100px;">home</text>
+                <text style="margin-top: 200px;font-size:100px;">home</text>
             </match>
             <match pattern = "/about">
-                <text style="font-size:100px;">about</text>
+                <text style="margin-top: 200px;font-size:100px;">about</text>
             </match>
         </div>
     </router>

@@ -17,7 +17,7 @@
 #import "WXUtility.h"
 #import "WXMonitor.h"
 #import "WXScrollerProtocol.h"
-#import "WXRouteManager.h"
+#import "WXMatchComponent.h"
 
 static NSThread *WXComponentThread;
 
@@ -203,33 +203,17 @@ static css_node_t * rootNodeGetChild(void *context, int i)
 
 - (void)_recursivelyAddComponent:(NSDictionary *)componentData toSupercomponent:(WXComponent *)supercomponent atIndex:(NSInteger)index appendingInTree:(BOOL)appendingInTree
 {
-    NSString *pattern = @"";
-    NSString *type = @"";
-    if(componentData && [componentData objectForKey:@"attr"] && [[componentData objectForKey:@"attr"] objectForKey:@"pattern"])
-    {
-        pattern = [WXConvert NSString:[[componentData objectForKey:@"attr"] objectForKey:@"pattern"]];
-    }
-    if(componentData && [componentData objectForKey:@"type"] )
-    {
-        type = [WXConvert NSString:[componentData objectForKey:@"type"]];
-    }
-    
-    WXRouteManager *routeManager = [WXRouteManager sharedInstance];
-    
-    if([type isEqualToString:@"match"])
-    {
-        if(!routeManager.to )
-        {
-            return;
-        }
-        
-        if( ![pattern isEqualToString:routeManager.to] )
-        {
-            return;
-        }
-    }
     
     WXComponent *component = [self _buildComponentForData:componentData];
+    
+    if([component isKindOfClass:[WXMatchComponent class]])
+    {
+        WXMatchComponent *mc = component;
+        if(mc.shouldAway)
+        {
+            return;
+        }
+    }
     
     index = (index == -1 ? supercomponent->_subcomponents.count : index);
     

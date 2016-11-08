@@ -6,7 +6,7 @@
  * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
  */
 
-#import "WXLinkComponent.h"
+#import "WXLinkToComponent.h"
 #import "WXNavigationProtocol.h"
 #import "WXHandlerFactory.h"
 #import "WXLog.h"
@@ -30,14 +30,14 @@
 #define Link_URL [NSString stringWithFormat:@"file://%@/bundlejs/app",[NSBundle mainBundle].bundlePath]  // 测试
 #endif
 
-@interface WXLinkComponent()
+@interface WXLinkToComponent()
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) NSString *to;
 
 @end
 
-@implementation WXLinkComponent
+@implementation WXLinkToComponent
 
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance
 {

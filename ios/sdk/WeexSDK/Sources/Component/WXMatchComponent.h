@@ -10,4 +10,6 @@
 
 @interface WXMatchComponent : WXComponent
 
+@property (nonatomic) BOOL shouldAway;
+
 @end
