@@ -1,13 +1,19 @@
 <template>
     <router>
         <div ida="app">
-            <link-to to = "/home" style="width: 750px; height: 100px;background-color: red"><text>go home</text></link-to>
-            <link-to to = "/about" style="width: 750px; height: 100px;background-color: green"><text>go about</text></link-to>
+            <div ida="app" style="flex-direction: row; justify-content: center;">
+                <link-to to = "/home" style="width: 375px; height: 100px;background-color: red"><text>go home</text></link-to>
+                <link-to to = "/about" style="width: 375px; height: 100px;background-color: green"><text>go about</text></link-to>
+            </div>
             <match pattern = "/home">
-                <text style="margin-top: 200px;font-size:100px;">home</text>
+                <div style="background-color: gold;height: 1200px;">
+                    <text style="margin-top: 100px;font-size:100px; text-align: center;">HOME</text>
+                </div>
             </match>
             <match pattern = "/about">
-                <text style="margin-top: 200px;font-size:100px;">about</text>
+                <div style="background-color: royalblue;height: 1200px;">
+                    <text style="margin-top: 100px;font-size:100px; text-align: center;">ABOUT</text>
+                </div>
             </match>
         </div>
     </router>

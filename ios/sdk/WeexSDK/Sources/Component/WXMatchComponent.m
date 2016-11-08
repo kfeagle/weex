@@ -41,6 +41,9 @@
         if( ![pattern isEqualToString:routeManager.to] )
         {
             self.shouldAway = YES;
+        }else
+        {
+            routeManager.to = @""; //注意清空
         }
     }
     
