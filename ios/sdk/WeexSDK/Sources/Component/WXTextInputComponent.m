@@ -75,6 +75,9 @@
 @property (nonatomic, assign) CGSize keyboardSize;
 @property (nonatomic, assign) CGRect rootViewOriginFrame;
 
+//private
+@property (nonatomic) BOOL isKeyboardShown;
+
 @end
 
 @implementation WXTextInputComponent
@@ -209,8 +212,13 @@ WX_EXPORT_METHOD(@selector(blur))
 
 - (void)viewWillLoad {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
+                                             selector:@selector(keyboardWillShown:)
                                                  name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -225,6 +233,10 @@ WX_EXPORT_METHOD(@selector(blur))
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification
                                                   object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -579,7 +591,25 @@ WX_EXPORT_METHOD(@selector(blur))
 }
 
 #pragma mark keyboard
+-(void)keyboardWillShown:(NSNotification*)notification
+{
+    if(self.isKeyboardShown)
+    {
+        [self keyboardShow:notification];
+    }
+}
+
 - (void)keyboardWasShown:(NSNotification*)notification
+{
+    if(!self.isKeyboardShown)
+    {
+        [self keyboardShow:notification];
+        self.isKeyboardShown = YES;
+    }
+}
+
+
+-(void)keyboardShow:(NSNotification*)notification
 {
     if(![_inputView isFirstResponder]) {
         return;
