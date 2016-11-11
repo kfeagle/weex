@@ -6,15 +6,9 @@
                 <link-to to = "/about" style="width: 375px; height: 100px;background-color: green"><text>go about</text></link-to>
             </div>
             <match pattern = "/home">
-                <!--<div style="background-color: gold;height: 1200px;">-->
-                    <!--<text style="margin-top: 100px;font-size:100px; text-align: center;">HOME {{title}}</text>-->
-                <!--</div>-->
                 <home></home>
             </match>
             <match pattern = "/about">
-                <!--<div style="background-color: royalblue;height: 1200px;">-->
-                    <!--<text style="margin-top: 100px;font-size:100px; text-align: center;">ABOUT {{title}}</text>-->
-                <!--</div>-->
                 <about></about>
             </match>
         </div>
@@ -27,4 +21,6 @@
             title: 'test'
         }
     }
+
+    openurl('alipay://payview?')
 </script>
