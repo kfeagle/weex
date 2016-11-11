@@ -1,15 +1,13 @@
 <template>
     <div style="background-color: gold;height: 1200px;">
-        <text style="margin-top: 100px;font-size:100px; text-align: center;">ABOUT {{title}} {{subtitle}}</text>
+        <text style="margin-top: 100px;font-size:100px; text-align: center;">ABOUT {{title}} </text>
     </div>
 </template>
 
 <script>
     module.exports = {
         data: {
-            title: global.title,
-            subtitle:global.WXEnvironment.route
-
+            title: global.abouttitle
         }
     }
 </script>

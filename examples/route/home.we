@@ -5,8 +5,7 @@
 </template>
 
 <script>
-    global.title = 'in about'
-    global.WXEnvironment.route = 'route test'
+    global.abouttitle = 'in about'
     module.exports = {
         data: {
             title: 'in home'
