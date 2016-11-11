@@ -1,0 +1,15 @@
+<template>
+    <div style="background-color: gold;height: 1200px;">
+        <text style="margin-top: 100px;font-size:100px; text-align: center;">HOME {{title}}</text>
+    </div>
+</template>
+
+<script>
+    global.title = 'in about'
+    global.WXEnvironment.route = 'route test'
+    module.exports = {
+        data: {
+            title: 'in home'
+        }
+    }
+</script>
