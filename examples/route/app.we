@@ -1,6 +1,6 @@
 <template>
     <router>
-        <div ida="app">
+        <div id="app">
             <div ida="app" style="flex-direction: row; justify-content: center;">
                 <link-to to = "/home" style="width: 375px; height: 100px;background-color: red"><text>go home</text></link-to>
                 <link-to to = "/about" style="width: 375px; height: 100px;background-color: green"><text>go about</text></link-to>
