@@ -21,6 +21,4 @@
             title: 'test'
         }
     }
-
-    openurl('alipay://payview?')
 </script>
