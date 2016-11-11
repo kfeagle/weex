@@ -34,7 +34,7 @@
 {
     if ((self = [super init])) {
         self.sourceURL = sourceURL;
-        self.hidesBottomBarWhenPushed = YES;
+        self.hidesBottomBarWhenPushed = NO;
         
         [self _addObservers];
     }
@@ -72,7 +72,7 @@
     [self _renderWithURL:_sourceURL];
     
     if ([self.navigationController isKindOfClass:[WXRootViewController class]]) {
-        self.navigationController.navigationBarHidden = YES;
+        self.navigationController.navigationBarHidden = NO;
     }
 }
 
@@ -131,7 +131,7 @@
 
     [_instance destroyInstance];
     _instance = [[WXSDKInstance alloc] init];
-    _instance.frame = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.view.bounds.size.height);
+    _instance.frame = CGRectMake(0.0f, 64.0f, self.view.bounds.size.width, self.view.bounds.size.height);
     _instance.pageObject = self;
     _instance.pageName = [[WXUtility urlByDeletingParameters:sourceURL] absoluteString];
     _instance.viewController = self;
