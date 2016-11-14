@@ -14,9 +14,6 @@
 #import <WeexSDK/WXSDKManager.h>
 #import "UIViewController+WXDemoNaviBar.h"
 #import "DemoDefine.h"
-#import <TBWXDevTool/WXDevTool.h>
-
-
 
 
 @interface WXDemoViewController () <UIScrollViewDelegate, UIWebViewDelegate>
@@ -46,11 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-#if TARGET_IPHONE_SIMULATOR
-#else
-    [WXDevTool setDebug:YES];
-    [WXDevTool launchDevToolDebugWithUrl:[NSString stringWithFormat:@"ws://%@:8088/debugProxy/native",CURRENT_IP]];
-#endif
+    
     [self setupNaviBar];
     [self setupRightBarItem];
     self.view.backgroundColor = [UIColor whiteColor];
