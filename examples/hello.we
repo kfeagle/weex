@@ -1,5 +1,46 @@
 <template>
-  <div>
-    <text style="font-size:100px;">Hello World.</text>
-  </div>
+  <scroller style="background-color: #ffffff;width:750;height:1000;">
+
+    <div class="textareaWrap">
+  <textarea
+          autofocus="true"
+          placeholder="写点什么介绍下自己....." class="textarea"
+          value="">
+  </textarea>
+    </div>
+
+  </scroller>
 </template>
+<style>
+  .c1 {height:200;border-width:3; border-style:solid; border-color:#FFFF00;border-radius:10;}
+  .c2 {background-color:#FF0000}
+  .btn{height:60;background-color:#368BD9;margin:30;}
+  .textareaWrap{
+    padding-top:40;
+    padding-left:40;
+    padding-right:40;
+  }
+  .textarea{
+    font-size:80; height:600;border-width:1;
+    border-style:solid; border-color:#cccccc;
+  }
+</style>
+
+<script>
+  module.exports = {
+    data : {
+      xstyle:"c1"
+    },
+    methods : {
+      t1: function (e) {
+        var self = this;
+        self.xstyle="c2";
+      },
+      t2: function (e) {
+        var self = this;
+        self.xstyle="c1";
+      },
+
+    },
+  }
+</script>

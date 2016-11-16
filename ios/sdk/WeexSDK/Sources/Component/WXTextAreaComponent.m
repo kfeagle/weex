@@ -406,6 +406,10 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     _placeHolderLabel.text = @"";
+    if(textView.text.length == 0)
+    {
+        [self setPlaceholderAttributedString];
+    }
     if (_inputEvent) {
         [self fireEvent:@"input" params:@{@"value":textView.text}];
     }
