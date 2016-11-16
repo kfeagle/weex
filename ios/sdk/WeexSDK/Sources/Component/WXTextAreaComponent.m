@@ -130,7 +130,7 @@
         }
         
         if (styles[@"color"]) {
-            _color = [WXConvert UIColor:styles[@"color"]];
+            _color = [self covertColor:styles[@"color"]];
         }
         if (styles[@"fontSize"]) {
             _fontSize = [WXConvert WXPixelType:styles[@"fontSize"]];
@@ -162,6 +162,22 @@
     
     return self;
 }
+
+-(UIColor *)covertColor:(id)value
+{
+    UIColor *color = [WXConvert UIColor:value];
+    if(value)
+    {
+        NSString *str = [WXConvert NSString:value];
+        if(str && [@"" isEqualToString:str])
+        {
+            color = [UIColor blackColor];
+        }
+    }
+    return color;
+}
+
+
 
 - (void)viewWillUnload
 {
@@ -295,7 +311,7 @@
 - (void)_updateStylesOnMainThread:(NSDictionary *)styles
 {
     if (styles[@"color"]) {
-        _color = [WXConvert UIColor:styles[@"color"]];
+        _color = [self covertColor:styles[@"color"]];
         [_textView setTextColor:_color];
     }
     
