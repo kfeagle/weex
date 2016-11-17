@@ -412,7 +412,6 @@
     }
     
     if (textView.markedTextRange == nil) {
-        NSLog(@"textView text:%@", textView.text);
         if (_inputEvent) {
             [self fireEvent:@"input" params:@{@"value":textView.text}];
         }
