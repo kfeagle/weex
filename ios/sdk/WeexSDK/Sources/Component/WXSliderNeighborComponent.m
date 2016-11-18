@@ -1688,40 +1688,40 @@ NSComparisonResult sliderNeighorCompareViewDepth(UIView *view1, UIView *view2, W
 
 - (void)updateSliderPage:(BOOL)animate
 {
-    __block UIView * currentView  = [self.sliderView itemViewAtIndex:[_sliderView currentItemIndex]];
-    __block UIView * lastView  = [self.sliderView itemViewAtIndex:[_sliderView lastItemIndex]];
-    __block UIView * nextView  = [self.sliderView itemViewAtIndex:[_sliderView nextItemIndex]];
-    
-    __block CGAffineTransform transfrom = CGAffineTransformIdentity;
-    float duration = 0;
-    __weak typeof(self) weakSelf = self;
-    if (animate) {
-        duration = 0.3;
-    }
-    
-    [UIView animateWithDuration:duration animations:^{
-        __strong typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            currentView.alpha = 1.0;
-            
-            if (fabs(strongSelf->neighborScale - 0) > CGFLOAT_MIN) {
-                transfrom = CGAffineTransformConcat(transfrom,CGAffineTransformMakeScale(0.9, 0.9));
-            }
-            currentView.transform = transfrom;
-            transfrom = CGAffineTransformIdentity;
-            
-            if (fabs(strongSelf->neighborScale - 0) <= CGFLOAT_MIN) {
-                strongSelf->neighborScale = 0.8;
-            }
-            
-            CGFloat tx = 0.5*_itemRect.size.width*((1-self->neighborScale)+(1-0.9))-self->neighborSpace;
-            transfrom = CGAffineTransformConcat(transfrom, CGAffineTransformMakeScale(strongSelf->neighborScale, strongSelf->neighborScale));
-            nextView.transform = CGAffineTransformConcat(transfrom,  CGAffineTransformMakeTranslation(-tx, 0));
-            lastView.transform = CGAffineTransformConcat(transfrom,  CGAffineTransformMakeTranslation(tx, 0));
-            lastView.alpha = strongSelf->neighborAlpha;
-            nextView.alpha = strongSelf->neighborAlpha;
-        }
-    }];
+//    __block UIView * currentView  = [self.sliderView itemViewAtIndex:[_sliderView currentItemIndex]];
+//    __block UIView * lastView  = [self.sliderView itemViewAtIndex:[_sliderView lastItemIndex]];
+//    __block UIView * nextView  = [self.sliderView itemViewAtIndex:[_sliderView nextItemIndex]];
+//    
+//    __block CGAffineTransform transfrom = CGAffineTransformIdentity;
+//    float duration = 0;
+//    __weak typeof(self) weakSelf = self;
+//    if (animate) {
+//        duration = 0.3;
+//    }
+//    
+//    [UIView animateWithDuration:duration animations:^{
+//        __strong typeof(self) strongSelf = weakSelf;
+//        if (strongSelf) {
+//            currentView.alpha = 1.0;
+//            
+//            if (fabs(strongSelf->neighborScale - 0) > CGFLOAT_MIN) {
+//                transfrom = CGAffineTransformConcat(transfrom,CGAffineTransformMakeScale(0.9, 0.9));
+//            }
+//            currentView.transform = transfrom;
+//            transfrom = CGAffineTransformIdentity;
+//            
+//            if (fabs(strongSelf->neighborScale - 0) <= CGFLOAT_MIN) {
+//                strongSelf->neighborScale = 0.8;
+//            }
+//            
+//            CGFloat tx = 0.5*_itemRect.size.width*((1-self->neighborScale)+(1-0.9))-self->neighborSpace;
+//            transfrom = CGAffineTransformConcat(transfrom, CGAffineTransformMakeScale(strongSelf->neighborScale, strongSelf->neighborScale));
+//            nextView.transform = CGAffineTransformConcat(transfrom,  CGAffineTransformMakeTranslation(-tx, 0));
+//            lastView.transform = CGAffineTransformConcat(transfrom,  CGAffineTransformMakeTranslation(tx, 0));
+//            lastView.alpha = strongSelf->neighborAlpha;
+//            nextView.alpha = strongSelf->neighborAlpha;
+//        }
+//    }];
 }
 
 @end
