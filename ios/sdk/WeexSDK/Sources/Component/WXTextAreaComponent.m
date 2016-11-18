@@ -19,6 +19,9 @@
 
 @implementation WXTextAreaView
 
+WX_EXPORT_METHOD(@selector(focus))
+WX_EXPORT_METHOD(@selector(blur))
+
 - (instancetype)init
 {
     self = [super init];
@@ -229,6 +232,23 @@
     [_textView setNeedsDisplay];
     [_textView setClipsToBounds:YES];
 }
+
+-(void)focus
+{
+    if(self.view)
+    {
+        [self.view becomeFirstResponder];
+    }
+}
+
+-(void)blur
+{
+    if(self.view)
+    {
+        [self.view resignFirstResponder];
+    }
+}
+
 
 #pragma mark - add-remove Event
 - (void)addEvent:(NSString *)eventName
