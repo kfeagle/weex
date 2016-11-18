@@ -19,9 +19,6 @@
 
 @implementation WXTextAreaView
 
-WX_EXPORT_METHOD(@selector(focus))
-WX_EXPORT_METHOD(@selector(blur))
-
 - (instancetype)init
 {
     self = [super init];
@@ -88,6 +85,9 @@ WX_EXPORT_METHOD(@selector(blur))
     UIEdgeInsets _padding;
     NSTextStorage* _textStorage;
 }
+
+WX_EXPORT_METHOD(@selector(focus))
+WX_EXPORT_METHOD(@selector(blur))
 
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance
 {
