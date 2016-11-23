@@ -428,7 +428,7 @@
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, _placeholderString.length)];
     }
     _placeHolderLabel.backgroundColor = [UIColor clearColor];
-    CGRect expectedLabelSize = [attributedString boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX}
+    CGRect expectedLabelSize = [attributedString boundingRectWithSize:(CGSize){self.textView.frame.size.width, CGFLOAT_MAX}
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
     
