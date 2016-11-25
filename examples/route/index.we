@@ -1,0 +1,54 @@
+<template>
+  <div >
+    <router>
+      <div class="app">
+        <div class="nav">
+            <linkto  to = "/detail" class="link">
+              <text class="title">detail</text>
+            </linkto>
+            <linkto  to = "/about" class="link">
+              <text class="title">about</text>
+            </linkto>
+        </div>
+
+        <match pattern = "/"><home></home></match>
+        <match pattern = "/detail"><detail></detail></match>
+        <match pattern = "/about"><about></about></match>
+      </div>
+    </router>
+  </div>
+</template>
+
+<script>
+  require("weex-router")
+</script>
+
+
+
+<style>
+.app {
+  text-align: center;
+  color: #2c3e50;
+    background-color: red;
+    height: 700px;
+
+}
+
+.title{
+  text-align: center;
+    height: 40px;
+}
+
+.nav{
+  text-align: center;
+  background-color: blue;
+    height: 150px;
+}
+.link{
+    width: 100px;
+    height: 50px;
+    background-color: yellow;
+}
+
+
+</style>

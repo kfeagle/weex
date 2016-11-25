@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list class="list">
+    <list class="list" id="list">
       <refresh  class = "refresh-view" display="{{refresh_display}}" onrefresh="onrefresh">
         <text if="{{(refresh_display==='hide')}}"> ↓ pull to refresh </text>
         <loading-indicator class="indicator"></loading-indicator>
@@ -16,6 +16,8 @@
       </loading>
     </list>
     <text class="count">Appear items:{{appearMin}} - {{appearMax}}</text>
+    <text type="default" size="small" height="400" value="获取焦点" onclick="reloadmore" style="width: 220px;height: 100px; border-color: #26a4f4;font-color: #26a4f4;border-width: 2px" id="button"></text>
+
   </div>
 </template>
 
@@ -81,7 +83,7 @@
 </style>
 
 <script>
-
+  require('weex-components');
   module.exports = {
     methods: {
       onappear: function (e) {
@@ -123,6 +125,9 @@
 
       onloading: function() {
         var self = this;
+
+
+
         self.loading_display = 'show';
         self.$call('modal', 'toast', {
           'message': 'onloading'
@@ -134,6 +139,14 @@
             }
           self.loading_display = 'hide';
         }, 3000);
+      },
+      reloadmore:function () {
+//        self.refresh_display = 'show';
+//        self.$call('modal', 'toast', {
+//          'message': 'onrefresh'
+//        });
+        var list = this.$el('list');
+        list.reloadmore()
       },
     },
     data: {

@@ -2,16 +2,19 @@
   <scroller>
     <wxc-panel title="input" type="primary">
       <input
-        type="text"
-        placeholder="Text Input"
-        class="input"
-        autofocus="true"
-        value=""
-        onchange="onchange"
-        oninput="oninput"
-      />
+              type="text"
+              placeholder="Text Input"
+              class="input"
+              autofocus="true"
+              value=""
+              onchange="onchange"
+              oninput="oninput"
+              id = "input"
+      >
       <text>oninput: {{txtInput}}</text>
       <text>onchange: {{txtChange}}</text>
+      <text type="default" size="small" height="400" value="获取焦点" onclick="focus" style="width: 220px;height: 100px; border-color: #26a4f4;font-color: #26a4f4;border-width: 2px" id="button"></text>
+      <text type="default" size="small" height="400" value="失去焦点" onclick="blur" style="width: 220px;height: 100px;border-color: #26a4f4;font-color: #26a4f4;border-width: 2px" id="button"></text>
     </wxc-panel>
   </scroller>
 </template>
@@ -39,6 +42,14 @@
       oninput: function(event) {
         this.txtInput = event.value;
         console.log('oninput', event.value);
+      },
+      focus:function () {
+        var input = this.$el('input');
+        input.focus()
+      },
+      blur:function () {
+        var input = this.$el('input');
+        input.blur()
       }
     }
   };

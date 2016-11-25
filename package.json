@@ -73,7 +73,8 @@
     "modals": "^0.1.6",
     "scroll-to": "0.0.2",
     "semver": "^5.1.0",
-    "weex-components": "^0.2.0"
+    "weex-components": "^0.2.0",
+    "weex-router": "git+https://github.com/zhangquan/weex-router.git"
   },
   "devDependencies": {
     "babel-cli": "~6.4.5",

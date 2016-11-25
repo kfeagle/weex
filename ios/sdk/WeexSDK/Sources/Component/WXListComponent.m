@@ -46,6 +46,7 @@
 
 @implementation WXHeaderComponent
 
+
 //TODO: header remove->need reload
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance
 {
@@ -133,6 +134,15 @@
     NSMutableArray<WXSection *> *_completedSections;
     
     NSUInteger _previousLoadMoreRowNumber;
+}
+
+WX_EXPORT_METHOD(@selector(reloadmore))
+
+
+
+-(void)reloadmore
+{
+    
 }
 
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance

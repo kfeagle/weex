@@ -1,0 +1,30 @@
+<template>
+  <div class="about">
+    <text class="h1">this is about page</text>
+  </div>
+</template>
+
+<script>
+module.export =   {
+  name: 'about',
+  create () {
+    console.log(this)
+  }
+}
+</script>
+
+<style>
+  .about{
+    height: 600px;
+    background-color: antiquewhite;
+    overflow: hidden;
+
+    height: 700px;
+  }
+
+   .h1{
+    margin-top: 100px;
+  }
+
+
+</style>
