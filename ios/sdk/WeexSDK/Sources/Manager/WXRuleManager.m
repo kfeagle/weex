@@ -63,7 +63,7 @@ static WXRuleManager *_sharedInstance = nil;
             [fontFamily setObject:fontSrc forKey:@"src"];
             if ([fontURL isFileURL]) {
                 // local font file will be added directly if existed
-                if ([WXUtility isFileExist:[fontURL path]]) {
+                if ([WXUtility isFileExist:[fontURL absoluteString]]) {
                     [fontFamily setObject:fontURL forKey:@"localSrc"];
                     [_fontStorage setObject:fontFamily forKey:rule[@"fontFamily"]];
                 } else {

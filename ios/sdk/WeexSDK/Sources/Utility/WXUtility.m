@@ -367,7 +367,7 @@ static BOOL WXNotStat;
     NSURLSessionDownloadTask *task = [session downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSURL * downloadPath = nil;
         if (!error && location) {
-            NSString *file = [NSString stringWithFormat:@"%@/%@",WX_FONT_DOWNLOAD_DIR,[WXUtility md5:[url path]]];
+            NSString *file = [NSString stringWithFormat:@"%@/%@",WX_FONT_DOWNLOAD_DIR,[WXUtility md5:[url absoluteString]]];
             
             downloadPath = [NSURL fileURLWithPath:file];
             NSFileManager *mgr = [NSFileManager defaultManager];
