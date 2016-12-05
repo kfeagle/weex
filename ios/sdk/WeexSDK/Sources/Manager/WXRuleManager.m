@@ -72,7 +72,7 @@ static WXRuleManager *_sharedInstance = nil;
                 return;
             }
             // remote font file
-            NSString *fontfile = [NSString stringWithFormat:@"%@/%@",WX_FONT_DOWNLOAD_DIR,[WXUtility md5:fontURL.path]];
+            NSString *fontfile = [NSString stringWithFormat:@"%@/%@",WX_FONT_DOWNLOAD_DIR,[WXUtility md5:fontURL.absoluteString]];
             if ([WXUtility isFileExist:fontfile]) {
                 // if has been cached, load directly
                 [fontFamily setObject:[NSURL fileURLWithPath:fontfile] forKey:@"localSrc"];
