@@ -13,6 +13,9 @@
         // Support sub directory, e.g. 'new-fashion/index'
 
         // common
+        {name: 'module/websocket',title:'Websocket'},
+        {name: 'module/clipboard', title: 'Clipboard'}, // 0.8 , developing
+
         {name: 'hello', title: 'Hello World'},
         {name: 'syntax/index', title: 'More Syntax'},
         {name: 'style/index', title: 'Common Style'},

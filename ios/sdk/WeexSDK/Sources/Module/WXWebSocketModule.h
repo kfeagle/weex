@@ -7,7 +7,9 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "WXModuleProtocol.h"
+#import "WXWebSocket.h"
 
-@interface WXWebSocketModule : NSObject
+@interface WXWebSocketModule : NSObject <WXModuleProtocol,WXWebSocketDelegate>
 
 @end
