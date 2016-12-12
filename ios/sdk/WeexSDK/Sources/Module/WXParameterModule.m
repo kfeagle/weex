@@ -1,0 +1,27 @@
+/**
+ * Created by Weex.
+ * Copyright (c) 2016, Alibaba, Inc. All rights reserved.
+ *
+ * This source code is licensed under the Apache Licence 2.0.
+ * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ */
+
+#import "WXParameterModule.h"
+
+@implementation WXParameterModule
+
+WX_EXPORT_METHOD(@selector(testParameter:second:))
+WX_EXPORT_METHOD(@selector(getString:))
+
+
+- (void)testParameter:(NSString *)content second:(NSString *)second
+{
+    NSLog(@"come here %@ %@",content,second);
+}
+
+- (void)getString:(WXModuleCallback)callback{
+    NSString *result = @"get string";
+    callback(result);
+}
+
+@end
