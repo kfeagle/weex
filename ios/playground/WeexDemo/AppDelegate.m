@@ -88,7 +88,7 @@
 #ifdef DEBUG
     [self atAddPlugin];
     [WXDebugTool setDebug:YES];
-    [WXLog setLogLevel:WXLogLevelAll];
+    [WXLog setLogLevel:WXLogLevelLog];
     
     #ifndef UITEST
         [[ATManager shareInstance] show];

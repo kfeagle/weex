@@ -39,21 +39,17 @@
 
             doCopy: function() {
 
-                this.textToCopy = 'test parameter';
+                this.textToCopy = 'copy';
                 var $clipboard = require('@weex-module/parameter');
                 $clipboard.testParameter(this.textToCopy);
-//                $clipboard.testParameter(this.textToCopy,this.textToCopy);
 
 
-                this.tips = "copy done. Now system clipboard has string of '" + this.textToCopy + "', try PASTE button, or paste in another app."
             },
 
             doPaste: function() {
+                this.textFromPaste = 'pause';
                 var $clipboard = require('@weex-module/parameter');
-                var me = this;
-                $clipboard.getString(function(ret) {
-                    me.textFromPaste = ret;
-                });
+                $clipboard.testParameter(this.textFromPaste,this.textFromPaste);
             }
 
         }
