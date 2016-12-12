@@ -1,5 +1,14 @@
 <template>
   <div>
-    <text style="font-size:100px;">Hello World.</text>
+    <text style="font-size:100px; font-weight: normal">Hello World.</text>
+    <text style="font-size:100px; font-weight: 100">Hello World.</text>
+    <text style="font-size:100px; font-weight: 200">Hello World.</text>
+    <text style="font-size:100px; font-weight: 300">Hello World.</text>
+    <text style="font-size:100px; font-weight: 400">Hello World.</text>
+    <text style="font-size:100px; font-weight: 500">Hello World.</text>
+    <text style="font-size:100px; font-weight: 600">Hello World.</text>
+    <text style="font-size:100px; font-weight: 700">Hello World.</text>
+    <text style="font-size:100px; font-weight: 800">Hello World.</text>
+    <text style="font-size:100px; font-weight: 900">Hello World.</text>
   </div>
 </template>
