@@ -483,10 +483,15 @@ WX_EXPORT_METHOD(@selector(blur))
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, _placeholderString.length)];
     }
     _placeHolderLabel.backgroundColor = [UIColor clearColor];
-    CGSize expectedLabelSize = [_placeholderString sizeWithFont:font constrainedToSize:CGSizeMake(296, FLT_MAX) lineBreakMode:_placeHolderLabel.lineBreakMode];
+    CGRect expectedLabelSize = [attributedString boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX}
+                                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                                              context:nil];
+    
+    _placeHolderLabel.clipsToBounds = NO;
     CGRect newFrame = _placeHolderLabel.frame;
-    newFrame.size.height = expectedLabelSize.height;
+    newFrame.size.height = ceil(expectedLabelSize.size.height);
     newFrame.size.width = _textView.frame.size.width;
+    newFrame.origin.y = 6;
     _placeHolderLabel.frame = newFrame;
     _placeHolderLabel.attributedText = attributedString;
 }
