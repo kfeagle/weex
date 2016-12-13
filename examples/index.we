@@ -14,7 +14,7 @@
 
         // common
         {name: 'module/websocket',title:'Websocket'},
-        {name: 'module/clipboard', title: 'Clipboard'}, // 0.8 , developing
+        {name: 'fontweight', title: 'fontweight'}, // 0.8 , developing
 
         {name: 'hello', title: 'Hello World'},
         {name: 'syntax/index', title: 'More Syntax'},

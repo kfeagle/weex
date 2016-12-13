@@ -338,32 +338,92 @@ static BOOL WXNotStat;
             [[WXRuleManager sharedInstance] removeRule:@"fontFace" rule:@{@"fontFamily": fontFamily}];
         }
     }
+    CGFloat weight = WXFontWeightRegular;
+    weight = [WXUtility textWeight:textWeight];
     if (!font) {
         if (fontFamily) {
             font = [UIFont fontWithName:fontFamily size:fontSize];
             if (!font) {
                 WXLogWarning(@"Unknown fontFamily:%@", fontFamily);
-                font = [UIFont systemFontOfSize:fontSize];
+                font = [UIFont systemFontOfSize:fontSize weight:weight];
             }
         } else {
-            font = [UIFont systemFontOfSize:fontSize];
+            font = [UIFont systemFontOfSize:fontSize weight:weight];
         }
     }
     
-    UIFontDescriptor *fontD = font.fontDescriptor;
-    UIFontDescriptorSymbolicTraits traits = 0;
-    traits = (textStyle == WXTextStyleItalic) ? (traits | UIFontDescriptorTraitItalic) : traits;
-    traits = (textWeight == WXTextWeightBold) ? (traits | UIFontDescriptorTraitBold) : traits;
-    if (traits != 0) {
-        fontD = [fontD fontDescriptorWithSymbolicTraits:traits];
-        UIFont *tempFont = [UIFont fontWithDescriptor:fontD size:0];
-        if (tempFont) {
-            font = tempFont;
-        }
-    }
-    
+//    UIFontDescriptor *fontD = font.fontDescriptor;
+//    UIFontDescriptorSymbolicTraits traits = 0;
+//    traits = (textStyle == WXTextStyleItalic) ? (traits | UIFontDescriptorTraitItalic) : traits;
+//    traits = (textWeight == WXTextWeightBold) ? (traits | UIFontDescriptorTraitBold) : traits;
+//    if (traits != 0) {
+//        fontD = [fontD fontDescriptorWithSymbolicTraits:traits];
+//        UIFont *tempFont = [UIFont fontWithDescriptor:fontD size:0];
+//        if (tempFont) {
+//            font = tempFont;
+//        }
+//    }
+//    
     return font;
 }
+
++ (CGFloat )textWeight:(WXTextWeight)type
+{
+    //    WXFontWeightUltraLight = 0,
+    //    WXFontWeightThin,
+    //    WXFontWeightLight,
+    //    WXFontWeightRegular,
+    //    WXFontWeightMedium,
+    //    WXFontWeightSemibold,
+    //    WXFontWeightBold,
+    //    WXFontWeightHeavy,
+    //    WXFontWeightBlack
+    
+    //    UIKIT_EXTERN const CGFloat UIFontWeightUltraLight NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightThin NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightLight NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightRegular NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightMedium NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightSemibold NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightBold NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightHeavy NS_AVAILABLE_IOS(8_2);
+    //    UIKIT_EXTERN const CGFloat UIFontWeightBlack NS_AVAILABLE_IOS(8_2);
+    CGFloat weight = WXFontWeightRegular;
+    switch (type) {
+        case WXFontWeightUltraLight:
+            weight = UIFontWeightUltraLight;
+            break;
+        case WXFontWeightThin:
+            weight = UIFontWeightThin;
+            break;
+        case WXFontWeightLight:
+            weight = UIFontWeightLight;
+            break;
+        case WXFontWeightRegular:
+            weight = UIFontWeightRegular;
+            break;
+        case WXFontWeightMedium:
+            weight = UIFontWeightMedium;
+            break;
+        case WXFontWeightSemibold:
+            weight = UIFontWeightSemibold;
+            break;
+        case WXFontWeightBold:
+            weight = UIFontWeightBold;
+            break;
+        case WXFontWeightHeavy:
+            weight = UIFontWeightHeavy;
+            break;
+        case WXFontWeightBlack:
+            weight = UIFontWeightBlack;
+            break;
+            
+        default:
+            break;
+    }
+    return weight;
+}
+
 
 + (void)getIconfont:(NSURL *)url completion:(void(^)(NSURL *url, NSError *error))completionBlock
 {
