@@ -18,8 +18,10 @@
 
 <template>
   <div class="wrapper" onclick="update">
-    <image src="{{logoUrl}}" class="logo"></image>
+    <image src="{{logoUrl}}" class="logo" onload="onload"></image>
     <text class="title">Hello {{target}}</text>
+    <text>width: {{width}}</text>
+    <text>height: {{height}}</text>
   </div>
 </template>
 
@@ -33,11 +35,17 @@
   module.exports = {
     data: {
       logoUrl: 'http://alibaba.github.io/weex/img/weex_logo_blue@3x.png',
-      target: 'World'
+      target: 'World',
+      height:'',
+      width:''
     },
     methods: {
       update: function (e) {
         this.target = 'Weex'
+      },
+      onload: function (e) {
+        this.width = e.size.naturalWidth;
+        this.height = e.size.naturalHeight;
       }
     }
   }

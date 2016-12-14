@@ -13,6 +13,8 @@
         // Support sub directory, e.g. 'new-fashion/index'
 
         // common
+        {name: 'imagesize',title:'imagesize'},
+
         {name: 'module/websocket',title:'Websocket'},
         {name: 'fontweight', title: 'fontweight'}, // 0.8 , developing
 

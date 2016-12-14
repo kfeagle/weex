@@ -222,7 +222,10 @@ static dispatch_queue_t WXImageUpdateQueue;
                         __strong typeof(self) strongSelf = weakSelf;
                         
                         if (weakSelf.imageLoadEvent) {
-                            [strongSelf fireEvent:@"load" params:@{ @"success": error? @"false" : @"true"}];
+                            NSMutableDictionary *sizeDict = [NSMutableDictionary new];
+                            sizeDict[@"naturalWidth"] = @(image.size.width);
+                            sizeDict[@"naturalHeight"] = @(image.size.height);
+                            [strongSelf fireEvent:@"load" params:@{ @"success": error? @"false" : @"true",@"size":sizeDict}];
                         }
                         if (error) {
                             downloadFailed(imageSrc, error);
