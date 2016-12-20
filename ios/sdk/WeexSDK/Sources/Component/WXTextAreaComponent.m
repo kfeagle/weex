@@ -467,7 +467,8 @@ WX_EXPORT_METHOD(@selector(blur))
     CGRect newFrame = _placeHolderLabel.frame;
     newFrame.size.height = ceil(expectedLabelSize.size.height);
     newFrame.size.width = _textView.frame.size.width;
-    newFrame.origin.y = 6;
+    newFrame.origin.x = 4;
+    newFrame.origin.y = 7;
     _placeHolderLabel.frame = newFrame;
     _placeHolderLabel.attributedText = attributedString;
 }
