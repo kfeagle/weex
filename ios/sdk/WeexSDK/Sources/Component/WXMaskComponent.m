@@ -8,13 +8,42 @@
 
 #import "WXMaskComponent.h"
 
+@interface WXMaskView : UIView
+
+@end
+
+@implementation WXMaskView
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if(self.superview == window) {
+        return;
+    }
+
+}
+
+-(void)didMoveToSuperview
+{
+    [super didMoveToSuperview];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if(self.superview == window) {
+        return;
+    }else {
+        [self removeFromSuperview];
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        [window addSubview:self];
+    }
+}
+
+@end
+
 @implementation WXMaskComponent
 
-- (void)layoutDidFinish
+- (UIView *)loadView
 {
-    [self.view removeFromSuperview];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:self.view];
+    return [WXMaskView new];
 }
 
 @end
