@@ -413,9 +413,14 @@ static css_node_t * rootNodeGetChild(void *context, int i)
     }
 
     CGFloat offset = [[options objectForKey:@"offset"] floatValue];
+    BOOL isAnimation = YES;
+    if([options objectForKey:@"animation"])
+    {
+        isAnimation = [[options objectForKey:@"animation"] boolValue];
+    }
     
     [self _addUITask:^{
-        [scrollerComponent scrollToComponent:toComponent withOffset:offset];
+        [scrollerComponent scrollToComponent:toComponent withOffset:offset animation:isAnimation];
     }];
 }
 

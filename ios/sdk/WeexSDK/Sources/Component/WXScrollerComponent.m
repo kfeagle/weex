@@ -295,7 +295,7 @@ WX_EXPORT_METHOD(@selector(resetLoadmore))
     }
 }
 
-- (void)scrollToComponent:(WXComponent *)component withOffset:(CGFloat)offset
+- (void)scrollToComponent:(WXComponent *)component withOffset:(CGFloat)offset animation:(BOOL)animation
 {
     UIScrollView *scrollView = (UIScrollView *)self.view;
     CGPoint contentOffset = scrollView.contentOffset;
@@ -320,7 +320,7 @@ WX_EXPORT_METHOD(@selector(resetLoadmore))
         }
     }
     
-    [scrollView setContentOffset:contentOffset animated:YES];
+    [scrollView setContentOffset:contentOffset animated:animation];
 }
 
 - (BOOL)isNeedLoadMore
