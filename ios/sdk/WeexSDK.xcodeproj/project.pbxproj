@@ -212,6 +212,11 @@
 		C41E1A981DC1FD15009C7F90 /* WXDatePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41E1A961DC1FD15009C7F90 /* WXDatePickerManager.m */; };
 		C4B834271DE69B09007AD27E /* WXPickerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B834251DE69B09007AD27E /* WXPickerModule.m */; };
 		C4B834281DE69B09007AD27E /* WXPickerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = C4B834261DE69B09007AD27E /* WXPickerModule.h */; };
+		C4C746551E1430EB00C2B109 /* WXWebSocketDefaultImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = C4C746501E1430EB00C2B109 /* WXWebSocketDefaultImpl.h */; };
+		C4C746561E1430EB00C2B109 /* WXWebSocketDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C746511E1430EB00C2B109 /* WXWebSocketDefaultImpl.m */; };
+		C4C746571E1430EB00C2B109 /* WXWebSocketHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = C4C746521E1430EB00C2B109 /* WXWebSocketHandler.h */; };
+		C4C746581E1430EB00C2B109 /* WXWebSocketModel.h in Headers */ = {isa = PBXBuildFile; fileRef = C4C746531E1430EB00C2B109 /* WXWebSocketModel.h */; };
+		C4C746591E1430EB00C2B109 /* WXWebSocketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C746541E1430EB00C2B109 /* WXWebSocketModel.m */; };
 		D312CE3B1C730DEB00046D68 /* WXWebComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D312CE391C730DEB00046D68 /* WXWebComponent.h */; };
 		D312CE3C1C730DEB00046D68 /* WXWebComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D312CE3A1C730DEB00046D68 /* WXWebComponent.m */; };
 		D317338C1C57257000BB7539 /* WXTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D317338A1C57257000BB7539 /* WXTransform.h */; };
@@ -478,6 +483,11 @@
 		C41E1A961DC1FD15009C7F90 /* WXDatePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDatePickerManager.m; sourceTree = "<group>"; };
 		C4B834251DE69B09007AD27E /* WXPickerModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPickerModule.m; sourceTree = "<group>"; };
 		C4B834261DE69B09007AD27E /* WXPickerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPickerModule.h; sourceTree = "<group>"; };
+		C4C746501E1430EB00C2B109 /* WXWebSocketDefaultImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXWebSocketDefaultImpl.h; sourceTree = "<group>"; };
+		C4C746511E1430EB00C2B109 /* WXWebSocketDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXWebSocketDefaultImpl.m; sourceTree = "<group>"; };
+		C4C746521E1430EB00C2B109 /* WXWebSocketHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXWebSocketHandler.h; sourceTree = "<group>"; };
+		C4C746531E1430EB00C2B109 /* WXWebSocketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXWebSocketModel.h; sourceTree = "<group>"; };
+		C4C746541E1430EB00C2B109 /* WXWebSocketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXWebSocketModel.m; sourceTree = "<group>"; };
 		D312CE391C730DEB00046D68 /* WXWebComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXWebComponent.h; sourceTree = "<group>"; };
 		D312CE3A1C730DEB00046D68 /* WXWebComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXWebComponent.m; sourceTree = "<group>"; };
 		D317338A1C57257000BB7539 /* WXTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTransform.h; sourceTree = "<group>"; };
@@ -766,6 +776,7 @@
 		77D161181C02DCB90010B15B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C4C7464F1E1430EA00C2B109 /* WebSocket */,
 				DC0F99301D48E5320087C6AF /* WeexSDK.h */,
 				2AF626C61C191E2200E71A38 /* Layout */,
 				742AD7371DF98C72007DC46C /* Loader */,
@@ -1015,6 +1026,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C4C7464F1E1430EA00C2B109 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				C4C746501E1430EB00C2B109 /* WXWebSocketDefaultImpl.h */,
+				C4C746511E1430EB00C2B109 /* WXWebSocketDefaultImpl.m */,
+				C4C746521E1430EB00C2B109 /* WXWebSocketHandler.h */,
+				C4C746531E1430EB00C2B109 /* WXWebSocketModel.h */,
+				C4C746541E1430EB00C2B109 /* WXWebSocketModel.m */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
 		DC9F46841D61AC9100A88239 /* module */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,6 +1083,7 @@
 				74A4BA5B1CABBBD000195969 /* WXDebugTool.h in Headers */,
 				2A837AB41CD9DE9200AEDF03 /* WXLoadingIndicator.h in Headers */,
 				747A787C1D1BAAC900DED9D0 /* WXComponent+ViewManagement.h in Headers */,
+				C4C746571E1430EB00C2B109 /* WXWebSocketHandler.h in Headers */,
 				77E65A061C10507B008B8775 /* WXModuleManager.h in Headers */,
 				DC0F99311D48E5320087C6AF /* WeexSDK.h in Headers */,
 				77E659FA1C0EE579008B8775 /* WXBridgeMethod.h in Headers */,
@@ -1072,6 +1096,7 @@
 				74BB5FB91DFEE81A004FC3DF /* WXMetaModule.h in Headers */,
 				DCA0EF641D6EED6F00CB18B9 /* WXGlobalEventModule.h in Headers */,
 				2A837AB21CD9DE9200AEDF03 /* WXLoadingComponent.h in Headers */,
+				C4C746551E1430EB00C2B109 /* WXWebSocketDefaultImpl.h in Headers */,
 				7423899F1C32733800D748CA /* WXType.h in Headers */,
 				59A582FC1CF5B17B0081FD3E /* WXBridgeContext.h in Headers */,
 				77D161621C02ED790010B15B /* WXLog.h in Headers */,
@@ -1126,6 +1151,7 @@
 				74B8BEFE1DC47B72004A6027 /* WXRootView.h in Headers */,
 				77E65A111C155EA8008B8775 /* WXImageComponent.h in Headers */,
 				2A60CE9C1C91733E00857B9F /* WXSwitchComponent.h in Headers */,
+				C4C746581E1430EB00C2B109 /* WXWebSocketModel.h in Headers */,
 				2A4445BF1CA8FD56009E7C6D /* WXTextComponentProtocol.h in Headers */,
 				746319021C60AFC100EFEBD4 /* WXThreadSafeCounter.h in Headers */,
 				77D1613C1C02DEA60010B15B /* WXJSCoreBridge.h in Headers */,
@@ -1342,6 +1368,7 @@
 				742AD7321DF98C45007DC46C /* WXResourceRequestHandlerDefaultImpl.m in Sources */,
 				77E65A0E1C155E99008B8775 /* WXDivComponent.m in Sources */,
 				2A60CE9D1C91733E00857B9F /* WXSwitchComponent.m in Sources */,
+				C4C746591E1430EB00C2B109 /* WXWebSocketModel.m in Sources */,
 				2A837AB71CD9DE9200AEDF03 /* WXRefreshComponent.m in Sources */,
 				74A4BA9B1CB3BAA100195969 /* WXThreadSafeMutableDictionary.m in Sources */,
 				77E65A1A1C155F25008B8775 /* WXScrollerComponent.m in Sources */,
@@ -1409,6 +1436,7 @@
 				D33451091D3E19480083598A /* WXCanvasComponent.m in Sources */,
 				74A4BA971CB365D100195969 /* WXAppConfiguration.m in Sources */,
 				59A583091CF5B2FD0081FD3E /* WXNavigationDefaultImpl.m in Sources */,
+				C4C746561E1430EB00C2B109 /* WXWebSocketDefaultImpl.m in Sources */,
 				746A2F401DF808E6004719D0 /* WXLocationModule.m in Sources */,
 				7463192A1C71B92600EFEBD4 /* WXModalUIModule.m in Sources */,
 				77D161501C02E3880010B15B /* WXUtility.m in Sources */,
