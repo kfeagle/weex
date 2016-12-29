@@ -20,4 +20,5 @@
 - (void)send:(NSString *)data;
 - (void)close;
 - (void)close:(NSString *)code reason:(NSString *)reason;
+- (void)clear;
 @end

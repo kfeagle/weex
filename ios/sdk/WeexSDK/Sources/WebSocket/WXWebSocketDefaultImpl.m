@@ -8,6 +8,8 @@
 
 #import "WXWebSocketDefaultImpl.h"
 #import "SRWebSocket.h"
+#import "WXThreadSafeMutableDictionary.h"
+#import "SRWebSocket+Weex.h"
 
 @interface WXWebSocketDefaultImpl()<SRWebSocketDelegate>
 
@@ -15,65 +17,90 @@
 
 @implementation WXWebSocketDefaultImpl
 {
-    SRWebSocket *webSocket;
-    WXWebSocketModel *wsModel;
-    id<WXWebSocketDelegate> wsDelegate;
+    WXThreadSafeMutableDictionary<NSString *, id<WXWebSocketDelegate>> *_delegates;
 }
 
 #pragma mark - WXWebSocketHandler
 - (void)open:(WXWebSocketModel *)webSocketModel withDelegate:(id<WXWebSocketDelegate>)delegate
 {
-    if(webSocket)
+    if(!_delegates)
     {
+        _delegates = [WXThreadSafeMutableDictionary new];
+    }
+    if(webSocketModel.identifier){
+        [_delegates removeObjectForKey:webSocketModel.identifier];
+        SRWebSocket *webSocket = webSocketModel.webSocket;
         webSocket.delegate = nil;
         [webSocket close];
+        
     }
-    
     NSArray *protols;
     if([webSocketModel.protocol length]>0){
        protols = [NSArray arrayWithObject:webSocketModel.protocol];
     }
-    webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:webSocketModel.url] protocols:protols];
+    SRWebSocket *webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:webSocketModel.url] protocols:protols];
     webSocket.delegate = self;
     [webSocket open];
-    wsDelegate = delegate;
-    wsModel = webSocketModel;
+    webSocketModel.webSocket = webSocket;
+    webSocket.identifier = webSocketModel.identifier;
+    [_delegates setObject:delegate forKey:webSocket.identifier];
 }
 
-- (void)send:(NSString *)data
+- (void)send:(WXWebSocketModel *)webSocketModel data:(NSString *)data
 {
-    [webSocket send:data];
+    [webSocketModel.webSocket send:data];
 }
 
-- (void)close
+- (void)close:(WXWebSocketModel *)webSocketModel
 {
-    [webSocket close];
+    [webSocketModel.webSocket close];
 }
 
-- (void)close:(NSString *)code reason:(NSString *)reason
+- (void)close:(WXWebSocketModel *)webSocketModel code:(NSString *)code reason:(NSString *)reason
 {
-    [webSocket closeWithCode:[code integerValue] reason:reason];
+    [webSocketModel.webSocket closeWithCode:[code integerValue] reason:reason];
 }
 
+- (void)clear:(WXWebSocketModel *)webSocketModel
+{
+    if ([webSocketModel.identifier isKindOfClass:[NSString class]]) {
+        SRWebSocket *websocket = webSocketModel.webSocket;
+        websocket.delegate = nil;
+        [websocket close];
+        [_delegates removeObjectForKey:webSocketModel.identifier];
+    }
+}
 
 #pragma mark -SRWebSocketDelegate
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket;
 {
-    [wsDelegate webSocketDidOpen:wsModel];
+    id<WXWebSocketDelegate> delegate = [_delegates objectForKey:webSocket.identifier];
+    if (delegate && [delegate respondsToSelector:@selector(didOpen)]) {
+        [delegate didOpen];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
-    [wsDelegate webSocket:wsModel didFailWithError:error];
+    id<WXWebSocketDelegate> delegate = [_delegates objectForKey:webSocket.identifier];
+    if (delegate && [delegate respondsToSelector:@selector(didFailWithError:)]) {
+        [delegate didFailWithError:error];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
 {
-    [wsDelegate webSocket:wsModel didReceiveMessage:message];
+    id<WXWebSocketDelegate> delegate = [_delegates objectForKey:webSocket.identifier];
+    if (delegate && [delegate respondsToSelector:@selector(didReceiveMessage:)]) {
+        [delegate didReceiveMessage:message];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 {
-    [wsDelegate webSocket:wsModel didCloseWithCode:code reason:reason wasClean:wasClean];
+    id<WXWebSocketDelegate> delegate = [_delegates objectForKey:webSocket.identifier];
+    if (delegate && [delegate respondsToSelector:@selector(webSocket:didCloseWithCode:reason:wasClean:)]) {
+        [delegate didCloseWithCode:code reason:reason wasClean:wasClean];
+    }
 }
 @end

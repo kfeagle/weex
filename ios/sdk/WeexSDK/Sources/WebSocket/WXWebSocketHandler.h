@@ -11,18 +11,18 @@
 #import "WXWebSocketModel.h"
 
 @protocol WXWebSocketDelegate<NSObject>
-- (void)webSocketDidOpen:(WXWebSocketModel *)webSocketModel;
-- (void)webSocket:(WXWebSocketModel *)webSocketModel didFailWithError:(NSError *)error;
-- (void)webSocket:(WXWebSocketModel *)webSocketModel didReceiveMessage:(id)message;
-- (void)webSocket:(WXWebSocketModel *)webSocketModel didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+- (void)didOpen;
+- (void)didFailWithError:(NSError *)error;
+- (void)didReceiveMessage:(id)message;
+- (void)didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 @end
 
 
 @protocol WXWebSocketHandler<NSObject>
 
 - (void)open:(WXWebSocketModel *)webSocketModel withDelegate:(id<WXWebSocketDelegate>)delegate;
-- (void)send:(NSString *)data;
-- (void)close;
-- (void)close:(NSString *)code reason:(NSString *)reason;
-
+- (void)send:(WXWebSocketModel *)webSocketModel data:(NSString *)data;
+- (void)close:(WXWebSocketModel *)webSocketModel;
+- (void)close:(WXWebSocketModel *)webSocketModel code:(NSString *)code reason:(NSString *)reason;
+- (void)clear:(WXWebSocketModel *)webSocketModel;
 @end

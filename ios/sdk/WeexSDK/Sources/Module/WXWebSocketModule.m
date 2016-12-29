@@ -126,4 +126,9 @@ WX_EXPORT_METHOD(@selector(onclose:))
     self.closeCallBack = callback;
 }
 
+-(void)dealloc
+{
+    [loader clear];
+}
+
 @end

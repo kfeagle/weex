@@ -33,6 +33,10 @@
     if(!_webSocketModel)
     {
         _webSocketModel = [WXWebSocketModel new];
+        CFUUIDRef uuid = CFUUIDCreate(NULL);
+        _webSocketModel.identifier = CFBridgingRelease(CFUUIDCreateString(NULL, uuid));
+        assert(_webSocketModel.identifier);
+        CFRelease(uuid);
     }
     return _webSocketModel;
 }
@@ -51,7 +55,7 @@
 {
     id<WXWebSocketHandler> requestHandler = [WXHandlerFactory handlerForProtocol:@protocol(WXWebSocketHandler)];
     if (requestHandler) {
-        [requestHandler send:data];
+        [requestHandler send:self.webSocketModel data:data];
     } else {
         WXLogError(@"No resource request handler found!");
     }
@@ -61,7 +65,17 @@
 {
     id<WXWebSocketHandler> requestHandler = [WXHandlerFactory handlerForProtocol:@protocol(WXWebSocketHandler)];
     if (requestHandler) {
-        [requestHandler close];
+        [requestHandler close:self.webSocketModel];
+    } else {
+        WXLogError(@"No resource request handler found!");
+    }
+}
+
+- (void)clear
+{
+    id<WXWebSocketHandler> requestHandler = [WXHandlerFactory handlerForProtocol:@protocol(WXWebSocketHandler)];
+    if (requestHandler) {
+        [requestHandler clear:self.webSocketModel];
     } else {
         WXLogError(@"No resource request handler found!");
     }
@@ -71,32 +85,32 @@
 {
     id<WXWebSocketHandler> requestHandler = [WXHandlerFactory handlerForProtocol:@protocol(WXWebSocketHandler)];
     if (requestHandler) {
-        [requestHandler close:code reason:reason];
+        [requestHandler close:self.webSocketModel code:code reason:reason];
     } else {
         WXLogError(@"No resource request handler found!");
     }
 }
 
 #pragma mark - WXWebSocketDelegate
-- (void)webSocketDidOpen:(WXWebSocketModel *)webSocketModel
+- (void)DidOpen
 {
     if (self.onOpen) {
         self.onOpen();
     }
 }
-- (void)webSocket:(WXWebSocketModel *)webSocketModel didFailWithError:(NSError *)error
+- (void)didFailWithError:(NSError *)error
 {
     if(self.onFail) {
         self.onFail(error);
     }
 }
-- (void)webSocket:(WXWebSocketModel *)webSocketModel didReceiveMessage:(id)message
+- (void)didReceiveMessage:(id)message
 {
     if (self.onReceiveMessage) {
         self.onReceiveMessage(message);
     }
 }
-- (void)webSocket:(WXWebSocketModel *)webSocketModel didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
+- (void)didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
     if (self.onClose) {
         self.onClose(code,reason,wasClean);

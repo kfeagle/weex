@@ -6,13 +6,11 @@
  * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
  */
 
-#import <Foundation/Foundation.h>
+#import "SRWebSocket.h"
+#import <objc/runtime.h>
 
-@interface WXWebSocketModel : NSObject
+@interface SRWebSocket (Weex)
 
-@property (nonatomic, copy) NSString  *url;
-@property (nonatomic, copy) NSString  *protocol;
 @property (nonatomic, copy) NSString *identifier;
-@property (nonatomic, strong) id webSocket;
 
 @end
