@@ -48,7 +48,9 @@ WX_EXPORT_METHOD(@selector(onclose:))
     loader.onReceiveMessage = ^(id message) {
         if (weakSelf) {
             NSMutableDictionary *dic = [NSMutableDictionary new];
-            [dic setObject:message forKey:@"data"];
+            if([message isKindOfClass:[NSString class]]) {
+                [dic setObject:message forKey:@"data"];
+            }
             if (weakSelf.messageCallBack) {
                 weakSelf.messageCallBack(dic,true);;
             }
@@ -57,7 +59,8 @@ WX_EXPORT_METHOD(@selector(onclose:))
     loader.onOpen = ^() {
         if (weakSelf) {
             if (weakSelf.openCallBack) {
-                weakSelf.openCallBack(@"",true);;
+                NSMutableDictionary *dict = [NSMutableDictionary new];
+                weakSelf.openCallBack(dict,true);;
             }
         }
     };
@@ -78,6 +81,7 @@ WX_EXPORT_METHOD(@selector(onclose:))
                 NSMutableDictionary * callbackRsp = [[NSMutableDictionary alloc] init];
                 [callbackRsp setObject:[NSNumber numberWithInteger:code] forKey:@"code"];
                 [callbackRsp setObject:reason forKey:@"reason"];
+                [callbackRsp setObject:wasClean?@true:@false forKey:@"wasClean"];
                 weakSelf.closeCallBack(callbackRsp,false);
             }
         }

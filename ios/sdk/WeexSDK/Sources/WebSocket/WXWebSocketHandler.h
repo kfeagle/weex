@@ -17,7 +17,6 @@
 - (void)didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 @end
 
-
 @protocol WXWebSocketHandler<NSObject>
 
 - (void)open:(WXWebSocketModel *)webSocketModel withDelegate:(id<WXWebSocketDelegate>)delegate;

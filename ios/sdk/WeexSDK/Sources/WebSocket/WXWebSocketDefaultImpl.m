@@ -99,7 +99,7 @@
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 {
     id<WXWebSocketDelegate> delegate = [_delegates objectForKey:webSocket.identifier];
-    if (delegate && [delegate respondsToSelector:@selector(webSocket:didCloseWithCode:reason:wasClean:)]) {
+    if (delegate && [delegate respondsToSelector:@selector(didCloseWithCode:reason:wasClean:)]) {
         [delegate didCloseWithCode:code reason:reason wasClean:wasClean];
     }
 }
