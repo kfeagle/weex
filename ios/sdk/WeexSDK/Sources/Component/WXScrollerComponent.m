@@ -423,6 +423,7 @@ WX_EXPORT_METHOD(@selector(resetLoadmore))
         _direction = @"down";
     } else if(_lastContentOffset.y < scrollView.contentOffset.y) {
         _direction = @"up";
+        [self handleLoadMore];
     }
    
     _lastContentOffset = scrollView.contentOffset;
@@ -439,9 +440,7 @@ WX_EXPORT_METHOD(@selector(resetLoadmore))
 
     // check sticky
     [self adjustSticky];
-    [self handleLoadMore];
     [self handleAppear];
-    
     if (self.onScroll) {
         self.onScroll(scrollView);
     }
